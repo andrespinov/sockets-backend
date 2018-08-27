@@ -5,8 +5,10 @@ var Schema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  playerText: String,
-  playerDesc: String
+  name: String,
+  posX: Number,
+  posY: Number,
+  color: String
 });
 
 module.exports = mongoose.model('player', Schema);

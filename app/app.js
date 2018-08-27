@@ -49,10 +49,17 @@ io.on('connection', (socket) => {
     sockets.addPlayer(io,socket);
   });
 
-  /*socket.on('delete', (socket) => {
+  // Receiving Updated Todo from client
+  socket.on('updatePlayer', (socket) => {
     console.log('socketData: '+JSON.stringify(socket));
-    sockets.deleteSocket(io,socket);
-  });*/
+    sockets.updatePlayer(io,socket);
+  });
+
+  // Receiving Todo to Delete
+  socket.on('deletePlayer', (socket) => {
+    console.log('socketData: '+JSON.stringify(socket));
+    sockets.deletePlayer(io,socket);
+  });
 })
 
 // connect to database
