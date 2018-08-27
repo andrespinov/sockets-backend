@@ -4,8 +4,9 @@ const controller = require("./controller");
 
 let router = new Router();
 
-router.route("/socket").post((req, res) => {
-  //controller.register(req, res);
-});
+router.route("/player").get((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    controller.getPlayers(req, res);
+  });
 
 module.exports = router;

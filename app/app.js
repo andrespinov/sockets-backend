@@ -1,12 +1,5 @@
 //Framework Web para NodeJs
 const express = require('express');
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
-/**
-  *Chalk es usada para colorear la consola.
-**/
-const chalk = require('chalk');
 
 /**
   *Se requiere /routes.js , recordar que dicho archivo exporta el router
@@ -18,6 +11,12 @@ const routes = require('./routes');
  *Se crea servidor express
  */
 const app = express();
+
+const http = require('http').Server(app);
+const io = require('socket.io')(3001);
+
+const sockets = require('./sockets/controller');
+const mongoose = require('mongoose');
 /**
  * Se hace llamado a nuestras exportaciones.
  *  /config/express esta haciendo un llamado a la funcion /config/express.js
@@ -41,11 +40,25 @@ app.use(routes);
  * Conexón con el socket
  */
 
-io.on('connection', function(socket){
-  console.log('user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconected');
+// socket.io connection
+io.on('connection', (socket) => {
+  console.log("Connected to Socket!!"+ socket.id);
+  
+  socket.on('addPlayer', (socket) => {
+    console.log('socketData: '+JSON.stringify(socket));
+    sockets.addPlayer(io,socket);
   });
+
+  /*socket.on('delete', (socket) => {
+    console.log('socketData: '+JSON.stringify(socket));
+    sockets.deleteSocket(io,socket);
+  });*/
+})
+
+// connect to database
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/haxball-app', { 
+  useNewUrlParser: true 
 });
 
 /**
@@ -58,5 +71,5 @@ io.on('connection', function(socket){
   * La funcion contenida sola
 **/
 app.listen(app.get('port'), () => {
-    console.log("Estamos corriendo en -->" + app.get('port')+ chalk.green('✓'));
+    console.log("Estamos corriendo en -->" + app.get('port') + ('✓'));
 })

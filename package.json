@@ -10,6 +10,7 @@
   "author": "martineliasq <elias.quintero@udea.edu.co>",
   "license": "ISC",
   "dependencies": {
+    "@types/socket.io": "^1.4.38",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "chalk": "^1.1.3",
@@ -20,9 +21,11 @@
     "express-validator": "^3.1.3",
     "lodash": "^4.17.4",
     "lusca": "^1.4.1",
+    "mongoose": "^5.2.9",
     "morgan": "^1.8.1",
     "path": "^0.12.7",
     "serve-favicon": "^2.4.2",
+    "socket.io": "^2.1.1",
     "superset": "^1.0.1",
     "validator": "^7.0.0"
   },

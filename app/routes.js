@@ -15,8 +15,8 @@ router.route('/ping').get((req, res) => {
   * Se hace llamados a los routes de los modelos
   * y se le asigna un nombre a cada recurso(Recomendacion:Mismo nombre del modelo)
 **/
-const estudiante = require('./models/estudiantes');
-router.use('/estudiantes', estudiante);
+const player = require('./sockets/route');
+router.use('/api', player);
 
 
 /**
